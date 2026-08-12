@@ -34,14 +34,20 @@ package.json.
   page). Nav, hero, and a three-item "Focus" grid (Backend / Cloud / Applied AI).
 - `static/css/main.css` — all styling, plain CSS, no preprocessor.
 - `.github/workflows/hugo.yaml` — deploys to GitHub Pages on push to `master`.
-  Pins the Hugo Extended version independently in the workflow's `HUGO_VERSION`
-  env var (currently 0.164.0) — bump this alongside local Hugo upgrades to keep
-  CI and local builds in sync.
+  Automatic deploys are limited to changes under `hugo.toml`, `layouts/**`,
+  `content/**`, or `static/**`. It pins the Hugo Extended version independently
+  in the workflow's `HUGO_VERSION` env var (currently 0.164.0); bump this
+  alongside local Hugo upgrades to keep CI and local builds in sync.
 
 ## Deploy
 
 - `.github/workflows/hugo.yaml` deploys to GitHub Pages (custom domain
-  `cesarh.co`) automatically on push to `master`.
+  `cesarh.co`) automatically when a push to `master` changes `hugo.toml`,
+  `layouts/**`, `content/**`, or `static/**`.
+- Documentation, repository metadata, agent instructions, and workflow-only
+  changes do not deploy automatically. Use `workflow_dispatch` for an
+  intentional redeploy or a deploy-related change outside those paths. Commit
+  type alone never determines deployment; path impact does.
 - The workflow builds with `--baseURL "${{ steps.pages.outputs.base_url }}"`,
   resolved at build time from the repo's current GitHub Pages settings. If
   those settings change (e.g. the custom domain is added/updated) without a
@@ -61,7 +67,7 @@ package.json.
   `gh run view <run-id> --repo caherdenez/website --log-failed`. A manual run
   deploys only content already present on remote `master`; local and unmerged
   branch changes are not included. A push or merged PR to `master` triggers the
-  workflow automatically.
+  workflow only when it includes a deployable path.
 - Keep the workflow actions on Node.js 24-compatible majors:
   `actions/checkout@v7`, `actions/configure-pages@v6`,
   `actions/upload-pages-artifact@v5`, and `actions/deploy-pages@v5`. Older
@@ -87,6 +93,16 @@ changing any public claim on the site (experience, skills, projects, bio):
 
 ## Working conventions
 
+- Follow Conventional Commits 1.0.0:
+  `https://www.conventionalcommits.org/en/v1.0.0/`.
+- Format commit subjects as `<type>[optional scope][!]: <description>`. Use
+  `feat`, `fix`, and `perf` for user-visible behavior; `docs` for documentation;
+  `refactor` for behavior-preserving code changes; `test` for tests; `build` for
+  build-system changes; `ci` for workflows; and `chore` for maintenance that
+  fits no more specific type. Mark breaking changes with `!` or a
+  `BREAKING CHANGE:` footer.
+- Choose the commit type from purpose, not deployment behavior. A `chore` that
+  changes `static/**` deploys, while a `feat` outside deployable paths does not.
 - Keep the site dependency-free unless a concrete requirement justifies adding a
   theme, JS toolchain, package manager, or external service.
 - Prefer Hugo templates, semantic HTML, and plain CSS.
