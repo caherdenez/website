@@ -12,6 +12,9 @@ env/
 build/
 develop-eggs/
 dist/
+public/
+resources/_gen/
+.hugo_build.lock
 downloads/
 eggs/
 .eggs/
