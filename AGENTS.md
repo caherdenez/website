@@ -47,3 +47,37 @@ articles or case studies.
   complete.
 - Do not commit, push, publish, or deploy unless explicitly requested.
 - Preserve unrelated worktree changes.
+
+## Deploy
+
+- `.github/workflows/hugo.yaml` deploys to GitHub Pages (custom domain
+  `cesarh.co`) automatically on push to `master`. Only explicit pushes to
+  `master` (e.g. merging a PR) trigger it — do not push to `master` to deploy
+  unless explicitly requested.
+- The workflow builds with `--baseURL "${{ steps.pages.outputs.base_url }}"`,
+  resolved at build time from the repo's current GitHub Pages settings. If
+  those settings change (e.g. the custom domain is added or updated) without a
+  new push, the last-deployed HTML keeps the stale `baseURL` — this breaks
+  asset paths (CSS/JS 404s) until the workflow re-runs.
+- To force a redeploy without a new commit, first verify GitHub CLI access,
+  dispatch the workflow explicitly from remote `master`, and watch the run:
+  ```sh
+  gh auth status
+  gh workflow run hugo.yaml --repo caherdenez/website --ref master
+  gh run list --repo caherdenez/website --workflow=hugo.yaml --limit 5
+  gh run watch <run-id> --repo caherdenez/website --exit-status
+  ```
+  If authentication is missing, use `gh auth login`. Obtain `<run-id>` from
+  `gh run list`; inspect failures with
+  `gh run view <run-id> --repo caherdenez/website --log-failed`. Dispatching
+  `master` deploys only content already present on remote `master`; local or
+  unmerged branch changes are not included. A push or merged PR to `master`
+  triggers the same workflow automatically.
+- Keep third-party actions on Node.js 24-compatible major versions. The current
+  migration targets are `actions/checkout@v7`, `actions/configure-pages@v6`,
+  `actions/upload-pages-artifact@v5`, and `actions/deploy-pages@v5`; older
+  Node.js 20 actions may run with a warning while GitHub forces Node.js 24, but
+  should be upgraded before compatibility is removed.
+- A manual workflow dispatch still counts as a deploy. Only do it when
+  explicitly requested, and verify `https://cesarh.co/` and its asset URLs
+  afterward rather than assuming success.
