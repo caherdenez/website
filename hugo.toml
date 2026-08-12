@@ -1,0 +1,7 @@
+baseURL = "https://cesarh.co/"
+locale = "en-US"
+title = "Cesar Augusto"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+
+[params]
+  description = "Senior Backend / Full-Stack Engineer focused on Python, AWS, distributed systems, reliability, and AI-enabled applications."
