@@ -26,6 +26,23 @@ hugo --minify
 
 The generated site is written to `public/`.
 
+## Deploy
+
+`.github/workflows/hugo.yaml` deploys to GitHub Pages (custom domain
+`cesarh.co`) automatically on every push to `master`.
+
+To force a redeploy without a new commit — e.g. after changing GitHub Pages
+settings such as the custom domain, since the built HTML's `baseURL` is
+resolved at build time from those settings — trigger the workflow manually:
+
+```sh
+gh workflow run hugo.yaml --repo caherdenez/website
+gh run watch <run-id> --repo caherdenez/website --exit-status
+```
+
+`gh workflow run` prints the run URL; grab `<run-id>` from that URL, or list
+runs with `gh run list --repo caherdenez/website --limit 5`.
+
 ## Structure
 
 ```text
