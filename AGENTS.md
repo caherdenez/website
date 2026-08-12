@@ -45,15 +45,33 @@ articles or case studies.
 - Run `hugo --minify` after template, content, configuration, or asset changes.
 - Run `git diff --check` and inspect the complete diff before considering changes
   complete.
+- Follow Conventional Commits 1.0.0:
+  `https://www.conventionalcommits.org/en/v1.0.0/`.
+- Format commit subjects as `<type>[optional scope][!]: <description>`. Use
+  `feat` for user-visible capabilities, `fix` for user-visible bug fixes,
+  `perf` for performance improvements, `docs` for documentation-only changes,
+  `refactor` for behavior-preserving code changes, `test` for tests, `build` for
+  build-system changes, `ci` for workflow changes, and `chore` for maintenance
+  that fits no more specific type. Mark breaking changes with `!` or a
+  `BREAKING CHANGE:` footer.
+- Choose the commit type from the change's purpose, not from whether it deploys.
+  For example, `chore: update portrait` can affect the published site, while
+  `feat: document future idea` may not.
 - Do not commit, push, publish, or deploy unless explicitly requested.
 - Preserve unrelated worktree changes.
 
 ## Deploy
 
 - `.github/workflows/hugo.yaml` deploys to GitHub Pages (custom domain
-  `cesarh.co`) automatically on push to `master`. Only explicit pushes to
-  `master` (e.g. merging a PR) trigger it — do not push to `master` to deploy
-  unless explicitly requested.
+  `cesarh.co`) automatically when a push to `master` changes deployable source:
+  `hugo.toml`, `layouts/**`, `content/**`, or `static/**`.
+- Changes limited to documentation, repository metadata, agent instructions, or
+  the workflow itself do not deploy automatically. This normally covers
+  `docs`, `ci`, and non-site `chore` commits. A commit of any type still deploys
+  when it changes a deployable path; path impact is the source of truth.
+- Use `workflow_dispatch` for an intentional redeploy or for a deploy-related
+  change outside the automatic path set. Do not add `[skip deploy]` parsing or
+  infer deployment solely from commit types.
 - The workflow builds with `--baseURL "${{ steps.pages.outputs.base_url }}"`,
   resolved at build time from the repo's current GitHub Pages settings. If
   those settings change (e.g. the custom domain is added or updated) without a
@@ -72,7 +90,7 @@ articles or case studies.
   `gh run view <run-id> --repo caherdenez/website --log-failed`. Dispatching
   `master` deploys only content already present on remote `master`; local or
   unmerged branch changes are not included. A push or merged PR to `master`
-  triggers the same workflow automatically.
+  triggers the workflow only when it includes a deployable path.
 - Keep third-party actions on Node.js 24-compatible major versions. The current
   migration targets are `actions/checkout@v7`, `actions/configure-pages@v6`,
   `actions/upload-pages-artifact@v5`, and `actions/deploy-pages@v5`; older

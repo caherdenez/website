@@ -4,7 +4,7 @@
     "namecheap": {
       "type": "remote",
       "url": "https://mcp.namecheap.com/mcp",
-      "enabled": true
+      "enabled": false
     }
   }
 }
