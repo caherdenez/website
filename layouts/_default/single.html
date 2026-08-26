@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ .Description }}">
+    <meta name="theme-color" content="#f2efe8">
+    <title>{{ .Title }} | {{ site.Title }}</title>
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+  </head>
+  <body>
+    <main>
+      <nav aria-label="Primary navigation">
+        <a class="wordmark" href="{{ "/" | relURL }}" aria-label="Cesar Augusto, home">CA</a>
+        <div class="nav-links">
+          <a href="https://github.com/caherdenez" rel="me">GitHub</a>
+          <a href="https://www.linkedin.com/in/caherdenez/" rel="me">LinkedIn</a>
+        </div>
+      </nav>
+
+      <article class="operations-page">
+        <header class="operations-hero">
+          <p class="eyebrow">{{ .Params.eyebrow }}</p>
+          <h1>{{ .Title }}</h1>
+        </header>
+
+        <div class="operations-copy">
+          {{ .Content }}
+        </div>
+
+        <section class="operations-contact" aria-labelledby="contact-title">
+          <p class="section-number">Start a conversation</p>
+          <h2 id="contact-title">Bring me the operational bottleneck.</h2>
+          <p>Tell me where the manual follow-up, disconnected data, or charge uncertainty is slowing the team down. I will reply with focused questions about the workflow and whether software is the right intervention.</p>
+          <a class="primary-action" href="mailto:hello@cesarh.co?subject=Drayage%20operations%20inquiry">Email hello@cesarh.co</a>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <p>Cesar Augusto</p>
+      <p>Python / FastAPI / AWS / Distributed Systems / Reliability / AI</p>
+    </footer>
+  </body>
+</html>

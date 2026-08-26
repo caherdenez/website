@@ -240,6 +240,94 @@ h3 {
   font-style: italic;
 }
 
+.operations-page {
+  padding-bottom: 120px;
+}
+
+.operations-hero {
+  max-width: 1000px;
+  padding: 110px 0 90px;
+}
+
+.operations-hero h1 {
+  margin-bottom: 0;
+  font-size: clamp(3.8rem, 8vw, 7.5rem);
+}
+
+.operations-copy {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.5fr);
+  gap: 0 clamp(50px, 9vw, 130px);
+  padding: 90px 0;
+  border-top: 1px solid var(--line);
+}
+
+.operations-copy > * {
+  min-width: 0;
+  grid-column: 2;
+}
+
+.operations-copy > p:first-child {
+  grid-column: 1;
+}
+
+.operations-copy > p:first-child {
+  grid-row: span 7;
+  color: var(--muted);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.7;
+}
+
+.operations-copy h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+}
+
+.operations-copy h2:not(:first-of-type) {
+  margin-top: 78px;
+}
+
+.operations-copy h3 {
+  margin: 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.operations-copy h3:not(:first-of-type) {
+  margin-top: 24px;
+}
+
+.operations-copy p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.operations-copy h3 + p {
+  margin-bottom: 0;
+}
+
+.operations-contact {
+  max-width: 760px;
+  padding-top: 90px;
+  border-top: 1px solid var(--line);
+}
+
+.operations-contact h2 {
+  margin-bottom: 28px;
+}
+
+.operations-contact > p:not(.section-number) {
+  max-width: 650px;
+  margin-bottom: 34px;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.operations-contact .primary-action {
+  display: inline-block;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -299,6 +387,41 @@ footer p {
   .work {
     grid-template-columns: 1fr;
     padding: 82px 0;
+  }
+
+  .operations-page {
+    padding-bottom: 82px;
+  }
+
+  .operations-hero {
+    padding: 82px 0 72px;
+  }
+
+  .operations-hero h1 {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .operations-copy {
+    grid-template-columns: 1fr;
+    padding: 72px 0;
+  }
+
+  .operations-copy > *,
+  .operations-copy > p:first-child {
+    grid-column: 1;
+  }
+
+  .operations-copy > p:first-child {
+    grid-row: auto;
+    margin-bottom: 64px;
+  }
+
+  .operations-copy h2:not(:first-of-type) {
+    margin-top: 64px;
+  }
+
+  .operations-contact {
+    padding-top: 72px;
   }
 }
 
