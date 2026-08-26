@@ -186,6 +186,60 @@ h3 {
   line-height: 1.7;
 }
 
+.work {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.5fr);
+  gap: clamp(50px, 9vw, 130px);
+  padding: 105px 0 120px;
+  border-top: 1px solid var(--line);
+}
+
+.project-card {
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.project-meta h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.project-tags {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-description {
+  max-width: 640px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.project-note {
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
@@ -240,6 +294,11 @@ footer p {
   .focus-grid article {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .work {
+    grid-template-columns: 1fr;
+    padding: 82px 0;
   }
 }
 
