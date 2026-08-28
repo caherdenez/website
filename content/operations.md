@@ -25,3 +25,5 @@ Connect operational data through APIs, synchronization workflows, and internal t
 [drayage-watch](https://github.com/caherdenez/drayage-watch) is my public portfolio demo for this problem. It combines a versioned tariff engine, charge-exposure projections, route estimates, and constrained dispatch planning in a FastAPI and React application.
 
 The demo uses synthetic fleet data and cited or illustrative tariff snapshots. It demonstrates the engineering approach, not production deployment or measured customer savings.
+
+[route-planner](https://github.com/caherdenez/route-planner) is a complementary demo behind the route-estimation piece: a standalone Excel-to-map delivery planner built on the same self-hosted OSRM infrastructure, covering overlapping Colombia and southeastern U.S. demo markets. It turns an uploaded stop list into an OSRM-solved delivery order with per-stop ETAs and time-window alerts. The two are separate codebases, not one integrated product, but they demonstrate the same self-hosted routing approach this page's dispatch and route-estimate claims rely on.
